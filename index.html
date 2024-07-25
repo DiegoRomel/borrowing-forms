@@ -21,10 +21,12 @@
     </div>
     <div class="container">
         <p class="title">Borrower's email:</p class="title">
-        <input type="text" class="inputbox">
-        <p class="title">Full borrower's name:</p class="title">
-        <input type="text" class="inputbox">
-        <p class="title">Material borrowed:</p class="title">
+        <input type="text" id="emailInput" placeholder="example.example@icbeu.com">
+        <button onclick="getInputValue()">Submit</button>
+        <p id="displayTest">hello</p>
+        <p class="title">Full borrower's name:</p>
+        <input type="text" id="nameInput" placeholder="Example Example">
+        <p class="title">Material borrowed:</p>
     </div>
     <div id="itemList">
         <div class="item"><img src="assets/ipad.jpeg" alt="ipad"></div>
@@ -32,5 +34,6 @@
         <div class="item"><img src="assets/tripe.jpg" alt="ipad"></div>
 
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
