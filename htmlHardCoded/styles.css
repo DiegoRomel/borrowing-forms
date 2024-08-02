@@ -123,3 +123,28 @@ nav ul li {
 .inputbox {
   background-color: white;
 }
+
+.ipadList {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.ipadList input {
+  display: none;
+}
+
+.ipadList input + label:before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid white;
+  background-color: #ffc300;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  margin-bottom: 3px;
+}
+
+.ipadList input:checked + label:before {
+  background-color: #0035a3;
+}
