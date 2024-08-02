@@ -5,8 +5,16 @@ colors
 #f70d21 red
 #
 */
+body {
+  background-image: url(assets/websiteBackground.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
 * {
-  background-color: #f6901e;
+  padding: 0;
+  margin: 10px;
   color: white;
   font-family: Poppins;
   font-weight: 600;
@@ -53,22 +61,22 @@ nav ul li {
 
 .container {
   margin-top: 15px;
-  background-color: white;
   border-style: solid;
   border-radius: 30px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: 70px;
   border-color: #f70d21;
   border-width: 7px;
   padding-top: 100px;
   padding-bottom: 100px;
+  background-color: rgba(255, 123, 0, 0.47);
 }
-.container p {
+.title {
   background: none;
-  color: #0035a3;
+  color: white;
   margin: 0;
+  font-size: 70px;
 }
 .container input {
   display: flex;
@@ -109,6 +117,7 @@ nav ul li {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  border-radius: 10%;
 }
 
 .inputbox {
