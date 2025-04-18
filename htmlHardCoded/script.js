@@ -105,9 +105,22 @@ function submitData() {
   submitButton.addEventListener("click", () => {
     const email = document.getElementById("emailInput").value;
     const name = document.getElementById("nameInput").value;
-    console.log("Email:", email);
-    console.log("Name:", name);
-    generatePDF();
+
+    // Create data array
+    const data = [
+      ["Name", "Email"], // header row
+      [name, email], // data row
+    ];
+
+    // Create worksheet
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+
+    // Create workbook and append worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "2025-1");
+
+    // Export to file
+    XLSX.writeFile(workbook, "borrowing_forms.xlsx");
     alert("Data submitted successfully!");
   });
 }
