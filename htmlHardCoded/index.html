@@ -1,227 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Borrowing Forms</title>
-		<link rel="stylesheet" href="styles.css" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-
-	<body>
-		<div id="header">
-			<nav class="navbar">
-				<h1>Borrowing Forms</h1>
-				<ul class="navbar-menu">
-					<li><a href="">Borrowing</a></li>
-					<li><a href="">Returning</a></li>
-				</ul>
-			</nav>
-		</div>
-		<div class="container">
-			<p class="title">Borrower's email:</p>
-			<input
-				type="text"
-				id="emailInput"
-				placeholder="example.example@icbeu.com"
-			/>
-			<button onclick="getInputValue()">Submit</button>
-		</div>
-		<div class="container">
-			<p class="title">Full borrower's name:</p>
-			<input
-				type="text"
-				id="nameInput"
-				placeholder="example.example@icbeu.com"
-			/>
-			<button onclick="getInputValue()">Submit</button>
-		</div>
-		<p class="title">Material borrowed:</p>
-		<div id="itemList">
-			<button onclick="toggleIpadList()">
-				<div class="item"><img src="assets/ipad.jpeg" alt="ipad" /></div>
-			</button>
-			<button>
-				<div class="item"><img src="assets/sphero.jpg" alt="ipad" /></div>
-			</button>
-			<button>
-				<div class="item"><img src="assets/tripe.jpg" alt="ipad" /></div>
-			</button>
-		</div>
-		<form class="ipadList" id="ipadList">
-			<div>
-				<input type="checkbox" id="iPad01" />
-				<label for="iPad01">iPad 01</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad02" />
-				<label for="iPad02">iPad 02</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad03" />
-				<label for="iPad03">iPad 03</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad04" />
-				<label for="iPad04">iPad 04</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad05" />
-				<label for="iPad05">iPad 05</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad06" />
-				<label for="iPad06">iPad 06</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad07" />
-				<label for="iPad07">iPad 07</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad08" />
-				<label for="iPad08">iPad 08</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad09" />
-				<label for="iPad09">iPad 09</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad10" />
-				<label for="iPad10">iPad 10</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad11" />
-				<label for="iPad11">iPad 11</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad12" />
-				<label for="iPad12">iPad 12</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad13" />
-				<label for="iPad13">iPad 13</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad14" />
-				<label for="iPad14">iPad 14</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad15" />
-				<label for="iPad15">iPad 15</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad16" />
-				<label for="iPad16">iPad 16</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad17" />
-				<label for="iPad17">iPad 17</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad18" />
-				<label for="iPad18">iPad 18</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad19" />
-				<label for="iPad19">iPad 19</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad20" />
-				<label for="iPad20">iPad 20</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad21" />
-				<label for="iPad21">iPad 21</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad22" />
-				<label for="iPad22">iPad 22</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad23" />
-				<label for="iPad23">iPad 23</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad24" />
-				<label for="iPad24">iPad 24</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad25" />
-				<label for="iPad25">iPad 25</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad26" />
-				<label for="iPad26">iPad 26</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad27" />
-				<label for="iPad27">iPad 27</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad28" />
-				<label for="iPad28">iPad 28</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad29" />
-				<label for="iPad29">iPad 29</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad30" />
-				<label for="iPad30">iPad 30</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad31" />
-				<label for="iPad31">iPad 31</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad32" />
-				<label for="iPad32">iPad 32</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad33" />
-				<label for="iPad33">iPad 33</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad34" />
-				<label for="iPad34">iPad 34</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad35" />
-				<label for="iPad35">iPad 35</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad36" />
-				<label for="iPad36">iPad 36</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad37" />
-				<label for="iPad37">iPad 37</label>
-			</div>
-			<div>
-				<input type="checkbox" id="iPad38" />
-				<label for="iPad38">iPad 38</label>
-			</div>
-		</form>
-		<div class="container">
-			<p class="title">Borrowing date:</p>
-			<input type="date" />
-		</div>
-		<div class="container">
-			<p class="title">Returning date:</p>
-			<input type="date" />
-		</div>
-		<div class="container" id="canvasSignature">
-			<canvas id="signature-pad" width="600" height="300"></canvas>
-			<button id="clear">Clear</button>
-			<button id="submit">Submit</button>
-			<script src="script.js"></script>
-		</div>
-
-		<script src="script.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Borrowing Forms</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header id="header">
+      <nav class="navbar">
+        <h1>Borrowing Forms</h1>
+        <ul class="navbar-menu">
+          <li><a href="#">Borrowing</a></li>
+          <li><a href="#">Returning</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <label for="emailInput" class="title">Borrower's email:</label>
+        <input type="email" id="emailInput" placeholder="example@example.com" />
+      </div>
+      <div class="container">
+        <label for="nameInput" class="title">Full borrower's name:</label>
+        <input type="text" id="nameInput" placeholder="Full Name" />
+      </div>
+      <div class="container">
+        <p class="title">Material borrowed:</p>
+        <div id="itemList"></div>
+        <div id="ipadList"></div>
+      </div>
+      <div class="container">
+        <p class="title">Borrowing date:</p>
+        <input type="date" id="borrowDate" />
+      </div>
+      <div class="container">
+        <p class="title">Returning date:</p>
+        <input type="date" id="returnDate" />
+      </div>
+      <div class="container">
+        <canvas id="signaturePad" width="600" height="300"></canvas>
+        <button id="clear-button">Clear</button>
+      </div>
+      <div class="container">
+        <button id="submitButton">Submit</button>
+      </div>
+    </main>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </body>
 </html>

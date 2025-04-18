@@ -1,66 +1,113 @@
-function getInputValue() {
-	const inputElement = document.getElementById("emailInput");
-	const inputValue = inputElement.value;
-	document.getElementById(
-		"displayTest"
-	).innerText = `input value: ${inputValue}`;
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize dynamic content
+  generateItemList();
+  generateIpadList();
+
+  // Canvas signature setup
+  setupCanvas();
+
+  // Form submission
+  submitData();
+});
+
+// Generate dynamic item list
+function generateItemList() {
+  const itemList = document.getElementById("itemList");
+  const items = ["iPad", "Sphero", "Tripod"]; // Example items
+
+  items.forEach((item, index) => {
+    const button = document.createElement("button");
+    const ipadList = document.getElementById("ipadList");
+    button.innerHTML = `<div class="item"><img src="assets/${item.toLowerCase()}.jpg" alt="${item}" /></div>`;
+    button.addEventListener("click", () => {
+      toggleIpadList(ipadList);
+    });
+    itemList.appendChild(button);
+  });
 }
 
-function toggleIpadList() {
-	const ipadList = document.getElementById("ipadList");
-	if (ipadList.style.display === "none") {
-		ipadList.style.display = "grid";
-	} else {
-		ipadList.style.display = "none";
-	}
+function generateIpadList() {
+  const ipadList = document.getElementById("ipadList");
+
+  for (let i = 1; i <= 38; i++) {
+    const div = document.createElement("div");
+    div.className = "ipad-item";
+    div.textContent = `iPad ${i}`;
+    ipadList.appendChild(div);
+  }
 }
 
-const canvas = document.getElementById("signature-pad");
-const ctx = canvas.getContext("2d");
-const clearButton = document.getElementById("clear");
-const submitButton = document.getElementById("submit");
-
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-
-canvas.addEventListener("mousedown", startDrawing);
-canvas.addEventListener("mousemove", drawLine);
-canvas.addEventListener("mouseup", stopDrawing);
-
-clearButton.addEventListener("click", clearCanvas);
-submitButton.addEventListener("click", submitSignature);
-
-function startDrawing(e) {
-	isDrawing = true;
-	[lastX, lastY] = [e.offsetX, e.offsetY];
+// Toggle iPad list visibility
+function toggleIpadList(ipadList) {
+  ipadList.style.display = ipadList.style.display === "none" ? "grid" : "none";
 }
 
-function drawLine(e) {
-	if (!isDrawing) return;
-	ctx.beginPath();
-	ctx.moveTo(lastX, lastY);
-	ctx.lineTo(e.offsetX, e.offsetY);
-	ctx.stroke();
-	[lastX, lastY] = [e.offsetX, e.offsetY];
+// Canvas signature setup
+function setupCanvas() {
+  const canvas = document.getElementById("signaturePad");
+  const ctx = canvas.getContext("2d");
+  const clearButton = document.getElementById("clear-button");
+  let isDrawing = false;
+
+  canvas.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  });
+
+  canvas.addEventListener("mousemove", (e) => {
+    if (!isDrawing) return;
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.stroke();
+  });
+
+  canvas.addEventListener("mouseup", () => {
+    isDrawing = false;
+    ctx.closePath();
+  });
+
+  canvas.addEventListener("mouseleave", () => {
+    isDrawing = false;
+  });
+
+  clearButton.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
 }
 
-function stopDrawing() {
-	isDrawing = false;
+//generating  form PDF
+async function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Get values from inputs
+  const name = document.getElementById("nameInput").value;
+  const email = document.getElementById("emailInput").value;
+
+  // Add text to PDF
+  doc.setFontSize(14);
+  doc.text("User Information", 10, 20);
+  doc.setFontSize(12);
+  doc.text("Name: " + name, 10, 35);
+  doc.text("Email: " + email, 10, 45);
+
+  // Save the PDF
+  doc.save("user-info.pdf");
 }
 
-function clearCanvas() {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+// Form submission
+function submitData() {
+  const submitButton = document.getElementById("submitButton");
 
-function submitSignature() {
-	// Here you can implement logic to save the signature as an image or send it to a server
-	// For example, you could use canvas.toDataURL() to get the signature as a data URL
-	console.log("Signature submitted!");
-	const canvas = document.getElementById("signature-pad");
-	const image = canvas.toDataURL("image/png");
-	const link = document.createElement("a");
-	link.download = "myDrawing.png";
-	link.href = image;
-	link.click();
+  submitButton.addEventListener("click", () => {
+    const email = document.getElementById("emailInput").value;
+    const name = document.getElementById("nameInput").value;
+    console.log("Email:", email);
+    console.log("Name:", name);
+    generatePDF();
+    alert("Data submitted successfully!");
+  });
 }
