@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize dynamic content
-  generateItemList();
-  generateIpadList();
+  //generateItemList();
+  //generateIpadList();
 
   // Canvas signature setup
   setupCanvas();
@@ -100,27 +100,44 @@ async function generatePDF() {
 
 // Form submission
 function submitData() {
-  const submitButton = document.getElementById("submitButton");
+  document
+    .getElementById("submitButton")
+    .addEventListener("click", async () => {
+      // Get the values from the inputs
+      const email = document.getElementById("emailInput").value.trim();
+      const name = document.getElementById("nameInput").value.trim();
 
-  submitButton.addEventListener("click", () => {
-    const email = document.getElementById("emailInput").value;
-    const name = document.getElementById("nameInput").value;
+      // Validate the inputs
+      if (!email || !name) {
+        alert("Please fill in both the email and name fields.");
+        return;
+      }
 
-    // Create data array
-    const data = [
-      ["Name", "Email"], // header row
-      [name, email], // data row
-    ];
+      // Prepare the data to send
+      const formData = new FormData();
+      formData.append("Email", email);
+      formData.append("Name", name);
 
-    // Create worksheet
-    const worksheet = XLSX.utils.aoa_to_sheet(data);
+      try {
+        // Send the data to the Google Apps Script endpoint
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbzyIg6l29yvYt49fYFrD8-ogSsogKG2xFGZCmPB_r1AXW92D7GBcWiK4EFbHGgL0gjw/exec",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
-    // Create workbook and append worksheet
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "2025-1");
-
-    // Export to file
-    XLSX.writeFile(workbook, "borrowing_forms.xlsx");
-    alert("Data submitted successfully!");
-  });
+        // Handle the response
+        const result = await response.json();
+        if (result.result === "success") {
+          alert("Data submitted successfully!");
+        } else {
+          alert("Error submitting data: " + result.error);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while submitting the data.");
+      }
+    });
 }
