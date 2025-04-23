@@ -59,7 +59,7 @@ function setupCanvas() {
     if (!isDrawing) return;
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.strokeStyle = "#000";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.lineCap = "round";
     ctx.stroke();
   });
@@ -98,6 +98,20 @@ async function generatePDF() {
   doc.save("user-info.pdf");
 }
 
+function getCurrentTime() {
+  const now = new Date();
+
+  const day = String(now.getDate()).padStart(2, "0");
+  const month = String(now.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const year = now.getFullYear();
+
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  const formattedTime = `${day}/${month}/${year} ${hours}:${minutes}`;
+  return formattedTime;
+}
+
 // Form submission
 function submitData() {
   document
@@ -106,6 +120,12 @@ function submitData() {
       // Get the values from the inputs
       const email = document.getElementById("emailInput").value.trim();
       const name = document.getElementById("nameInput").value.trim();
+      const description = document
+        .getElementById("descriptionInput")
+        .value.trim();
+      const canvas = document.getElementById("signaturePad");
+      const borrowDate = document.getElementById("borrowDate").value.trim();
+      const returnDate = document.getElementById("returnDate").value.trim();
 
       // Validate the inputs
       if (!email || !name) {
@@ -117,11 +137,16 @@ function submitData() {
       const formData = new FormData();
       formData.append("Email", email);
       formData.append("Name", name);
+      formData.append("Description of The Material Borrowed", description);
+      formData.append("Signature", canvas.toDataURL("image/png"));
+      formData.append("Timestamp", getCurrentTime());
+      formData.append("Borrowing Date", convertDate(borrowDate));
+      formData.append("Returning Date", convertDate(returnDate));
 
       try {
         // Send the data to the Google Apps Script endpoint
         const response = await fetch(
-          "https://script.google.com/macros/s/AKfycbzyIg6l29yvYt49fYFrD8-ogSsogKG2xFGZCmPB_r1AXW92D7GBcWiK4EFbHGgL0gjw/exec",
+          "https://script.google.com/macros/s/AKfycbyhNzjwzyYTo6OSyH9bEiypofIKWwo97wJGKEjMMlSULez48QBGXNvMImnt2HHlIvnk/exec",
           {
             method: "POST",
             body: formData,
@@ -140,4 +165,22 @@ function submitData() {
         alert("An error occurred while submitting the data.");
       }
     });
+}
+
+function convertDate(dateInput) {
+  try {
+    // Check if a date is selected
+    if (!dateInput) {
+      console.log("No date selected.");
+      return;
+    }
+
+    const [year, month, day] = dateInput.split("-"); // Split the input into year, month, and day
+
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+  } catch (error) {
+    console.error("Error:", error);
+    alert("An error occurred while formatting the borrowing date.");
+  }
 }
